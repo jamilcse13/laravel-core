@@ -11,6 +11,10 @@ class Container {
     protected $resolvedInstances = [];
     protected $bindings = [];
 
+    /**
+     * when we need to bind an abstract class with a concrete class
+     * or we have to resolve an abstract class with any logic
+     */
     public function bind($abstract, $concrete)
     {
         $this->bindings[$abstract] = $concrete;
@@ -18,6 +22,7 @@ class Container {
 
     public function resolve($className)
     {
+        // resolve the Dependency Injection
         $reflector = new  Reflection($className);
         $dependencies = $reflector->getConstructor();  // ['CommentRepository']
 
